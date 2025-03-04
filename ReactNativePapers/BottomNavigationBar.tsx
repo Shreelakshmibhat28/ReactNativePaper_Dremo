@@ -6,12 +6,12 @@ import Settings from "./Settings";
 import { View, StyleSheet, ScrollView } from "react-native";
 
 const TaskListRoute = ({ tasks, handleEditTask, handleDeleteTask }: any) => (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      {tasks.map((task: string, index: number) => (
-        <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
-      ))}
-    </ScrollView>
-  );
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
+    {tasks.map((task: string, index: number) => (
+      <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
+    ))}
+  </ScrollView>
+);
 
 const BottomNavigationBar: React.FC<any> = ({
   task,
@@ -39,7 +39,7 @@ const BottomNavigationBar: React.FC<any> = ({
   return (
     <BottomNavigation
       navigationState={{ index: tabIndex, routes }}
-      onIndexChange={setTabIndex} // Update tab when changed
+      onIndexChange={setTabIndex} // Update tab when changed and dismiss keyboard
       renderScene={renderScene}
     />
   );

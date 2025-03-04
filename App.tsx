@@ -1,17 +1,8 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useCallback } from "react";
+import { StyleSheet, Keyboard } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import TaskCard from "./ReactNativePapers/Cards";
 import AppBar from "./ReactNativePapers/AppBar";
 import BottomNavigationBar from "./ReactNativePapers/BottomNavigationBar";
-
-const TaskListRoute = ({ tasks, handleEditTask, handleDeleteTask }: any) => (
-  <View style={styles.container}>
-    {tasks.map((task: string, index: number) => (
-      <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
-    ))}
-  </View>
-);
 
 const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
@@ -19,7 +10,7 @@ const App: React.FC = () => {
   const [editIndex, setEditIndex] = useState<number>(-1);
   const [tabIndex, setTabIndex] = useState(0); // State for tab navigation
 
-  const handleAddTask = (): void => {
+  const handleAddTask = useCallback((): void => {
     if (task) {
       if (editIndex !== -1) {
         const updatedTasks = [...tasks];
@@ -31,16 +22,21 @@ const App: React.FC = () => {
       }
       setTask("");
     }
-  };
+  }, [task, tasks, editIndex]);
 
-  const handleEditTask = (index: number): void => {
+  const handleEditTask = useCallback((index: number): void => {
     setTask(tasks[index]);
     setEditIndex(index);
     setTabIndex(0); // Auto-switch to "Add Task" tab
-  };
+  }, [tasks]);
 
-  const handleDeleteTask = (index: number): void => {
+  const handleDeleteTask = useCallback((index: number): void => {
     setTasks(tasks.filter((_, i) => i !== index));
+  }, [tasks]);
+
+  const handleTabChange = (index: number) => {
+    setTabIndex(index);
+    Keyboard.dismiss(); // Dismiss the keyboard when changing tabs
   };
 
   return (
@@ -55,7 +51,7 @@ const App: React.FC = () => {
         handleEditTask={handleEditTask}
         handleDeleteTask={handleDeleteTask}
         tabIndex={tabIndex} // Pass tab index state
-        setTabIndex={setTabIndex} // Pass function to update tab index
+        setTabIndex={handleTabChange} // Pass function to update tab index and dismiss keyboard
       />
     </PaperProvider>
   );
