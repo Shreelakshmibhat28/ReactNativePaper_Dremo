@@ -11,6 +11,7 @@ interface CardProps {
 
 const TaskCard: React.FC<CardProps> = ({ task, onEdit, onDelete }) => {
   return (
+    <View style={styles.container}>
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <Text style={styles.taskText}>{task}</Text>
@@ -24,10 +25,15 @@ const TaskCard: React.FC<CardProps> = ({ task, onEdit, onDelete }) => {
         </View>
       </View>
     </Card>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20
+      },
   card: {
     marginBottom: 13,
     borderRadius: 6,
@@ -38,6 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Ensures text & icons are in one line
     alignItems: "center", // Aligns text & icons properly
     justifyContent: "space-between", // Pushes icons to the right
+   
   },
   taskText: {
     fontSize: 15,
