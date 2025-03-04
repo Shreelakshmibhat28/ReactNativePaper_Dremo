@@ -3,15 +3,15 @@ import { BottomNavigation } from "react-native-paper";
 import AddTask from "./AddTask";
 import TaskCard from "./Cards";
 import Settings from "./Settings";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 const TaskListRoute = ({ tasks, handleEditTask, handleDeleteTask }: any) => (
-  <View style={styles.container}>
-    {tasks.map((task: string, index: number) => (
-      <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
-    ))}
-  </View>
-);
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {tasks.map((task: string, index: number) => (
+        <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
+      ))}
+    </ScrollView>
+  );
 
 const BottomNavigationBar: React.FC<any> = ({
   task,
@@ -48,7 +48,11 @@ const BottomNavigationBar: React.FC<any> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 10,
+  },
+  scrollContainer: {
+    paddingVertical: 10,
+    // alignItems: "center",
   },
 });
 
