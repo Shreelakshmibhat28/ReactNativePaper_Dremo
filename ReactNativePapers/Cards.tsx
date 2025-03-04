@@ -12,28 +12,28 @@ interface CardProps {
 const TaskCard: React.FC<CardProps> = ({ task, onEdit, onDelete }) => {
   return (
     <View style={styles.container}>
-    <Card style={styles.card}>
-      <View style={styles.cardContent}>
-        <Text style={styles.taskText}>{task}</Text>
-        <View style={styles.actions}>
-          <TouchableOpacity onPress={onEdit}>
-            <MaterialIcons name="edit" size={20} color="green" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
-            <MaterialIcons name="delete" size={20} color="red" />
-          </TouchableOpacity>
+      <Card style={styles.card}>
+        <View style={styles.cardContent}>
+          <Text style={styles.taskText}>{task}</Text>
+          <View style={styles.actions}>
+            <TouchableOpacity onPress={onEdit}>
+              <MaterialIcons name="edit" size={20} color="green" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
+              <MaterialIcons name="delete" size={20} color="red" />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </Card>
+      </Card>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20
-      },
+  container: {
+    flex: 1,
+    padding: 20
+  },
   card: {
     marginBottom: 13,
     borderRadius: 6,
@@ -41,20 +41,18 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   cardContent: {
-    flexDirection: "row", // Ensures text & icons are in one line
-    alignItems: "center", // Aligns text & icons properly
-    justifyContent: "space-between", // Pushes icons to the right
-   
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   taskText: {
     fontSize: 15,
-    // fontWeight: "bold",
   },
   actions: {
     flexDirection: "row",
   },
   deleteButton: {
-    marginLeft: 10, // Add spacing between edit & delete icons
+    marginLeft: 10,
   },
 });
 

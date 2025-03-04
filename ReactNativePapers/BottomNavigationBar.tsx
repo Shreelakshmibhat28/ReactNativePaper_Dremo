@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BottomNavigation } from "react-native-paper";
 import AddTask from "./AddTask";
 import TaskCard from "./Cards";
@@ -21,9 +21,9 @@ const BottomNavigationBar: React.FC<any> = ({
   tasks,
   handleEditTask,
   handleDeleteTask,
+  tabIndex,
+  setTabIndex,
 }) => {
-  const [index, setIndex] = useState(0);
-
   const routes = [
     { key: "addTask", title: "Add Task", icon: "plus" },
     { key: "taskList", title: "Task List", icon: "format-list-bulleted" },
@@ -38,8 +38,8 @@ const BottomNavigationBar: React.FC<any> = ({
 
   return (
     <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
+      navigationState={{ index: tabIndex, routes }}
+      onIndexChange={setTabIndex} // Update tab when changed
       renderScene={renderScene}
     />
   );

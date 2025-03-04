@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
 interface AddTaskProps {
@@ -12,7 +12,6 @@ interface AddTaskProps {
 const AddTask: React.FC<AddTaskProps> = ({ task, setTask, handleAddTask, editIndex }) => {
   return (
     <View style={styles.container}>
-      
       <TextInput
         style={styles.input}
         placeholder="Enter task..."
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 50,
   },
- 
   input: {
     borderWidth: 2,
     borderColor: "#ccc",

@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import TaskCard from "./ReactNativePapers/Cards";
-import AddTask from "./ReactNativePapers/AddTask";
-import Settings from "./ReactNativePapers/Settings";
 import AppBar from "./ReactNativePapers/AppBar";
 import BottomNavigationBar from "./ReactNativePapers/BottomNavigationBar";
 
@@ -19,6 +17,7 @@ const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
   const [tasks, setTasks] = useState<string[]>([]);
   const [editIndex, setEditIndex] = useState<number>(-1);
+  const [tabIndex, setTabIndex] = useState(0); // State for tab navigation
 
   const handleAddTask = (): void => {
     if (task) {
@@ -37,6 +36,7 @@ const App: React.FC = () => {
   const handleEditTask = (index: number): void => {
     setTask(tasks[index]);
     setEditIndex(index);
+    setTabIndex(0); // Auto-switch to "Add Task" tab
   };
 
   const handleDeleteTask = (index: number): void => {
@@ -54,6 +54,8 @@ const App: React.FC = () => {
         tasks={tasks}
         handleEditTask={handleEditTask}
         handleDeleteTask={handleDeleteTask}
+        tabIndex={tabIndex} // Pass tab index state
+        setTabIndex={setTabIndex} // Pass function to update tab index
       />
     </PaperProvider>
   );
