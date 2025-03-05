@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, memo, useEffect } from "react";
 import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
@@ -6,19 +6,28 @@ interface AddTaskProps {
   task: string;
   setTask: (task: string) => void;
   handleAddTask: () => void;
+  handleEditTask: (index: number, task: string) => void;
   editIndex: number;
 }
 
-const AddTask: React.FC<AddTaskProps> = memo(({ task, setTask, handleAddTask, editIndex }) => {
+const AddTask: React.FC<AddTaskProps> = memo(({ task, setTask, handleAddTask, handleEditTask, editIndex }) => {
   const [localTask, setLocalTask] = useState<string>(task);
+
+  useEffect(() => {
+    setLocalTask(task);
+  }, [task]);
 
   const handleChangeText = useCallback((text: string) => {
     setLocalTask(text);
   }, []);
 
   const handleAddTaskClick = () => {
-    setTask(localTask);
-    handleAddTask();
+    if (editIndex !== -1) {
+      handleEditTask(editIndex, localTask);
+    } else {
+      setTask(localTask);
+      handleAddTask();
+    }
   };
 
   return (
@@ -37,7 +46,7 @@ const AddTask: React.FC<AddTaskProps> = memo(({ task, setTask, handleAddTask, ed
               onChangeText={handleChangeText}
               autoFocus={true} // Ensure the input is focused
               blurOnSubmit={false} // Prevent the input from losing focus on submit
-              right={<TextInput.Affix text="/100" />}
+              //right={<TextInput.Affix text="/100" />}
               style={styles.input}
             />
             <Button mode="contained" onPress={handleAddTaskClick} style={styles.addButton}>

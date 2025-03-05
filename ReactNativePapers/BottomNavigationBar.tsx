@@ -5,10 +5,10 @@ import TaskCard from "./Cards";
 import Settings from "./Settings";
 import { View, StyleSheet, ScrollView } from "react-native";
 
-const TaskListRoute = ({ tasks, handleEditTask, handleDeleteTask }: any) => (
+const TaskListRoute = ({ tasks, handleEditTaskClick, handleDeleteTask }: any) => (
   <ScrollView contentContainerStyle={styles.scrollContainer}>
     {tasks.map((task: string, index: number) => (
-      <TaskCard key={index} task={task} onEdit={() => handleEditTask(index)} onDelete={() => handleDeleteTask(index)} />
+      <TaskCard key={index} task={task} onEdit={() => handleEditTaskClick(index)} onDelete={() => handleDeleteTask(index)} />
     ))}
   </ScrollView>
 );
@@ -17,9 +17,10 @@ const BottomNavigationBar: React.FC<any> = ({
   task,
   setTask,
   handleAddTask,
+  handleEditTask,
   editIndex,
   tasks,
-  handleEditTask,
+  handleEditTaskClick,
   handleDeleteTask,
   tabIndex,
   setTabIndex,
@@ -31,8 +32,8 @@ const BottomNavigationBar: React.FC<any> = ({
   ];
 
   const renderScene = BottomNavigation.SceneMap({
-    addTask: () => <AddTask task={task} setTask={setTask} handleAddTask={handleAddTask} editIndex={editIndex} />,
-    taskList: () => <TaskListRoute tasks={tasks} handleEditTask={handleEditTask} handleDeleteTask={handleDeleteTask} />,
+    addTask: () => <AddTask task={task} setTask={setTask} handleAddTask={handleAddTask} handleEditTask={handleEditTask} editIndex={editIndex} />,
+    taskList: () => <TaskListRoute tasks={tasks} handleEditTaskClick={handleEditTaskClick} handleDeleteTask={handleDeleteTask} />,
     settings: Settings,
   });
 

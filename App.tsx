@@ -12,19 +12,20 @@ const App: React.FC = () => {
 
   const handleAddTask = useCallback((): void => {
     if (task) {
-      if (editIndex !== -1) {
-        const updatedTasks = [...tasks];
-        updatedTasks[editIndex] = task;
-        setTasks(updatedTasks);
-        setEditIndex(-1);
-      } else {
-        setTasks([...tasks, task]);
-      }
+      setTasks([...tasks, task]);
       setTask("");
     }
-  }, [task, tasks, editIndex]);
+  }, [task, tasks]);
 
-  const handleEditTask = useCallback((index: number): void => {
+  const handleEditTask = useCallback((index: number, updatedTask: string): void => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index] = updatedTask;
+    setTasks(updatedTasks);
+    setEditIndex(-1);
+    setTask("");
+  }, [tasks]);
+
+  const handleEditTaskClick = useCallback((index: number): void => {
     setTask(tasks[index]);
     setEditIndex(index);
     setTabIndex(0); // Auto-switch to "Add Task" tab
@@ -46,9 +47,10 @@ const App: React.FC = () => {
         task={task}
         setTask={setTask}
         handleAddTask={handleAddTask}
+        handleEditTask={handleEditTask}
         editIndex={editIndex}
         tasks={tasks}
-        handleEditTask={handleEditTask}
+        handleEditTaskClick={handleEditTaskClick}
         handleDeleteTask={handleDeleteTask}
         tabIndex={tabIndex} // Pass tab index state
         setTabIndex={handleTabChange} // Pass function to update tab index and dismiss keyboard
