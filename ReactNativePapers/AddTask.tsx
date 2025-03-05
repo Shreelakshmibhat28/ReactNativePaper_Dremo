@@ -44,9 +44,7 @@ const AddTask: React.FC<AddTaskProps> = memo(({ task, setTask, handleAddTask, ha
               placeholder="Enter task..."
               value={localTask}
               onChangeText={handleChangeText}
-              autoFocus={true} // Ensure the input is focused
               blurOnSubmit={false} // Prevent the input from losing focus on submit
-              //right={<TextInput.Affix text="/100" />}
               style={styles.input}
             />
             <Button mode="contained" onPress={handleAddTaskClick} style={styles.addButton}>
