@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 10,
+    height:100,
+    fontSize:18,
   },
   addButton: {
     marginTop: 10,
