@@ -42,6 +42,8 @@ const BottomNavigationBar: React.FC<any> = ({
       navigationState={{ index: tabIndex, routes }}
       onIndexChange={setTabIndex} // Update tab when changed and dismiss keyboard
       renderScene={renderScene}
+      activeColor="black" // Set active icon color to black
+      inactiveColor="black" // Set inactive icon color to black
     />
   );
 };

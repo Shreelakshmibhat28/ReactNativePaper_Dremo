@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { StyleSheet, Keyboard } from "react-native";
-import { Provider as PaperProvider, DefaultTheme, DarkTheme } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import AppBar from "./ReactNativePapers/AppBar";
 import BottomNavigationBar from "./ReactNativePapers/BottomNavigationBar";
 
@@ -9,7 +9,6 @@ const App: React.FC = () => {
   const [tasks, setTasks] = useState<string[]>([]);
   const [editIndex, setEditIndex] = useState<number>(-1);
   const [tabIndex, setTabIndex] = useState(0); // State for tab navigation
-  const [isDarkTheme, setIsDarkTheme] = useState(false); // State for theme
 
   const handleAddTask = useCallback((): void => {
     if (task) {
@@ -41,14 +40,8 @@ const App: React.FC = () => {
     Keyboard.dismiss(); // Dismiss the keyboard when changing tabs
   };
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
-
-  const theme = isDarkTheme ? DarkTheme : DefaultTheme;
-
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider>
       <AppBar />
       <BottomNavigationBar
         task={task}
@@ -61,8 +54,6 @@ const App: React.FC = () => {
         handleDeleteTask={handleDeleteTask}
         tabIndex={tabIndex} // Pass tab index state
         setTabIndex={handleTabChange} // Pass function to update tab index and dismiss keyboard
-        toggleTheme={toggleTheme} // Pass toggleTheme function
-        isDarkTheme={isDarkTheme} // Pass isDarkTheme state
       />
     </PaperProvider>
   );
